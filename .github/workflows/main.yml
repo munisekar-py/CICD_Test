@@ -16,7 +16,7 @@ jobs:
       run: ls -al
     
     - name : Doing SCP on EC2
-      uses: appleboy/scp-action@vi
+      uses: appleboy/scp-action@v1
       with:
           host: ${{ secrets.HOSTIP }}
           username: ${{ secrets.USER }}
