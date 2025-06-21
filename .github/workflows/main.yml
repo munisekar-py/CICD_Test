@@ -14,7 +14,20 @@ jobs:
 
     - name: Show All files
       run: ls -al
-    
+
+    - name : Doing SSH on EC2
+      uses: appleboy/ssh-action@v1
+      with:
+          host: ${{ secrets.HOSTIP }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSHKEY }}
+          port: 22
+          script: |
+            sudo apt-get update -y
+            sudo apt-get install nginx -y
+            sudo systemctl start nginx
+            sudo systemctl enable nginx     
+
     - name : Doing SCP on EC2
       uses: appleboy/scp-action@v1
       with:
@@ -23,4 +36,4 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           port: 22
           source: "./"
-          target: "/home/ubuntu/"
+          target: "/var/www/html/"
