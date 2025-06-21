@@ -28,4 +28,3 @@ jobs:
             echo "hello world" > /tmp/test/hello.txt
             cd /tmp/test
             ls -al
-      
