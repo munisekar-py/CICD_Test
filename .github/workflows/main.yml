@@ -17,9 +17,9 @@ jobs:
     - name : Doing SSH on EC2
       uses: appleboy/ssh-action@v1
       with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.HOSTIP }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSHKEY }}
           port: 22
           script: |
             who
