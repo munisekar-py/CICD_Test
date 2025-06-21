@@ -14,17 +14,22 @@ jobs:
 
     - name: Show All files
       run: ls -al
-    - name : Doing SSH on EC2
-      uses: appleboy/ssh-action@v1
+
+#    - name : Doing SSH on EC2
+#      uses: appleboy/ssh-action@v1
+ #     with:
+  #        host: ${{ secrets.HOSTIP }}
+   #       username: ${{ secrets.USER }}
+   #       key: ${{ secrets.SSHKEY }}
+   #       port: 22
+
+      
+    - name : Doing SCP on EC2
+      uses: appleboy/scp-action@v0.0.7
       with:
           host: ${{ secrets.HOSTIP }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSHKEY }}
           port: 22
-          script: |
-            who
-            pwd
-            mkdir -p /tmp/test
-            echo "hello world" > /tmp/test/hello.txt
-            cd /tmp/test
-            ls -al
+          source: "./"
+          target: "/tmp"
