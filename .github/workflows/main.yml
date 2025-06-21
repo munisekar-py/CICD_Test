@@ -14,3 +14,18 @@ jobs:
 
     - name: Show All files
       run: ls -al
+    - name : Doing SSH on EC2
+      uses: appleboy/ssh-action@v1
+      with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.USERNAME}}
+          password: ${{ secrets.SSH_KEY}}
+          port: 22
+          script: |
+            who
+            pwd
+            mkdir -p /tmp/test
+            echo "hello world" > /tmp/test/hello.txt
+            cd /tmp/test
+            ls -al
+      
