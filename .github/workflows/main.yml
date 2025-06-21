@@ -26,7 +26,9 @@ jobs:
             sudo apt-get update -y
             sudo apt-get install nginx -y
             sudo systemctl start nginx
-            sudo systemctl enable nginx     
+            sudo systemctl enable nginx    
+            sudo rm -rf /var/www/html/*
+            sudo cp -r ~/temp-html/* /var/www/html/
 
     - name : Doing SCP on EC2
       uses: appleboy/scp-action@v1
@@ -35,5 +37,5 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSHKEY }}
           port: 22
-          source: "./"
-          target: "/var/www/html/"
+          source: "./index.html"
+          target: "~/temp-html"
