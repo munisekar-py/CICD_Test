@@ -14,6 +14,18 @@ jobs:
 
     - name: Show All files
       run: ls -al
+
+            
+    - name : Upload HTML to EC2 temp folder
+      uses: appleboy/scp-action@v1
+      with:
+          host: ${{ secrets.HOSTIP }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSHKEY }}
+          port: 22
+          source: "./*"
+          target: "~/temp-html/"
+
       
     - name : Setup NGINX and move HTML files
       uses: appleboy/ssh-action@v1
@@ -34,13 +46,3 @@ jobs:
             # Clear NGINX root and copy new files
             sudo rm -rf /var/www/html/*
             sudo cp -r ~/index.html /var/www/html/
-            
-    - name : Upload HTML to EC2 temp folder
-      uses: appleboy/scp-action@v1
-      with:
-          host: ${{ secrets.HOSTIP }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSHKEY }}
-          port: 22
-          source: "./*"
-          target: "~/temp-html/"
