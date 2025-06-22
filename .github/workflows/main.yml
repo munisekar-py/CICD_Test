@@ -45,4 +45,4 @@ jobs:
             ls -l ~
             # Clear NGINX root and copy new files
             sudo rm -rf /var/www/html/*
-            sudo cp -r ~/index.html /var/www/html/
+            sudo cp -r ~/temp-html/* /var/www/html/
