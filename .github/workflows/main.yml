@@ -43,4 +43,4 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           port: 22
           source: "./*"
-          target: "~"
+          target: "~/temp-html/"
