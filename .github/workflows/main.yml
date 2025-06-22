@@ -27,10 +27,14 @@ jobs:
             sudo apt-get update -y
             sudo apt-get install nginx -y
             sudo systemctl start nginx
-            sudo systemctl enable nginx    
+            sudo systemctl enable nginx
+            # Print uploaded files
+            echo "Checking home directory contents:"
+            ls -l ~
+            # Clear NGINX root and copy new files
             sudo rm -rf /var/www/html/*
-            sudo cp -r ~/temp-html/* /var/www/html/
-
+            sudo cp -r ~/index.html /var/www/html/
+            
     - name : Upload HTML to EC2 temp folder
       uses: appleboy/scp-action@v1
       with:
@@ -39,4 +43,4 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           port: 22
           source: "./*"
-          target: "~/temp-html"
+          target: "~"
